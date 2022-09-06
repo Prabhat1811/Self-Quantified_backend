@@ -63,21 +63,21 @@ class UserAPI(Resource):
 
     #     return "Email changed", 200
 
-    @auth_required("token")
-    def delete(self):
+    # @auth_required("token")
+    # def delete(self):
 
-        user = db.session.query(User).filter(User.id==current_user.id).first()
-        try:
-            user = db.session.query(User).filter(User.id==current_user.id).first()
-        except:
-            raise NotFoundError(status_code=404)
+    #     user = db.session.query(User).filter(User.id==current_user.id).first()
+    #     try:
+    #         user = db.session.query(User).filter(User.id==current_user.id).first()
+    #     except:
+    #         raise NotFoundError(status_code=404)
         
-        # find all trackers and logs and delete them
+    #     # find all trackers and logs and delete them
 
-        db.session.delete(user)
-        db.session.commit()
+    #     db.session.delete(user)
+    #     db.session.commit()
 
-        return "User deleted", 200
+    #     return "User deleted", 200
 
     # def post(self):
     #     args = create_user_parser.parse_args()
@@ -157,6 +157,11 @@ class TrackerAPI(Resource):
 
         if user is None:
             raise NotFoundError(status_code=404)
+
+        tracker_log = db.session.query(TrackerLog).filter(tracker.id == TrackerLog.tracker_id).first()
+
+        if tracker_log is not None:
+            raise BusinessValidationError(status_code=400, error_code="BE2006", error_message="Tracker contains existing tracker logs")
 
         db.session.delete(tracker)
         db.session.commit()
@@ -275,18 +280,18 @@ class TrackerLogAPI(Resource):
             raise BusinessValidationError(status_code=400, error_code="BE2004", error_message="tracker_id is required")
 
         if value is None or value == "":
-            raise BusinessValidationError(status_code=400, error_code="BE2004", error_message="value is required")
+            raise BusinessValidationError(status_code=400, error_code="BE2005", error_message="value is required")
         
 
-        tracker = db.session.query(Tracker).filter(Tracker.id == tracker_id and Tracker.user_id == current_user.id).first()
+        tracker = db.session.query(Tracker).filter(Tracker.id == tracker_id).first()
 
         if tracker is None:
             raise NotFoundError(status_code=404)
 
-        # user = db.session.query(Tracker).filter(tracker.user_id == current_user.id).first()
+        user = db.session.query(Tracker).filter(tracker.user_id == current_user.id).first()
 
-        # if user is None:
-        #     raise NotFoundError(status_code=404)
+        if user is None:
+            raise NotFoundError(status_code=404)
 
         new_trackerLog = TrackerLog(tracker_id=tracker_id, value=value, note=note)
         db.session.add(new_trackerLog)
