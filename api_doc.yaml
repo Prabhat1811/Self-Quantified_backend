@@ -1,0 +1,495 @@
+openapi: 3.0.0
+info:
+  title: Quantified Self API design
+  description: >
+    <div>This document lays down the API design for Quantified self app.</div>
+
+  version: 1.0.0
+servers:
+  - url: http://127.0.0.1:8000/
+paths:
+  #   /api/course/{course_id}:
+  #     description: End point to read, update and delete a course resource with course_id = courseId.
+  #     get:
+  #       description: Operation to Read course resource.
+  #       parameters:
+  #         - in: path
+  #           name: course_id
+  #           required: true
+  #           schema:
+  #             type: integer
+  #             example: 201
+  #       responses:
+  #         '200':
+  #           description: Request Successful
+  #           content:
+  #             application/json:
+  #               schema:
+  #                 title: course object
+  #                 type: object
+  #                 properties:
+  #                   course_id:
+  #                     type: integer
+  #                     example: 201
+  #                   course_name:
+  #                     type: string
+  #                     example: Maths1
+  #                   course_code:
+  #                     type: string
+  #                     example: MA101
+  #                   course_description:
+  #                     type: string
+  #                     example: Course Description Example
+  #         '500':
+  #           description: Internal Server Error
+  #         '404':
+  #           description: Course not found
+
+  #     put:
+  #       description: Operation to update the course resource.
+  #       parameters:
+  #         - in: path
+  #           name: course_id
+  #           required: true
+  #           schema:
+  #             type: integer
+  #             example: 201
+  #       requestBody:
+  #         content:
+  #           application/json:
+  #             schema:
+  #               type: object
+  #               properties:
+  #                 course_name:
+  #                   type: string
+  #                   example: Maths1
+  #                 course_code:
+  #                   type: string
+  #                   example: MA101
+  #                 course_description:
+  #                   type: string
+  #                   example: Course Description Example
+  #       responses:
+  #         '200':
+  #           description: Successfuly updated
+  #           content:
+  #             application/json:
+  #               schema:
+  #                 type: object
+  #                 properties:
+  #                   course_id:
+  #                     type: integer
+  #                     example: 201
+  #                   course_name:
+  #                     type: string
+  #                     example: Maths1
+  #                   course_code:
+  #                     type: string
+  #                     example: MA101
+  #                   course_description:
+  #                     type: string
+  #                     example: Course Description Example
+  #         '404':
+  #           description: Course not found
+  #         '500':
+  #           description: Internal Server Error
+  #         '400':
+  #           description: Bad request
+  #           content:
+  #             application/json:
+  #               schema:
+  #                 type: object
+  #                 properties:
+  #                   error_code:
+  #                     type: string
+  #                   error_message:
+  #                     type: string
+
+  #     delete:
+  #       description: Operation to delete the course resource
+  #       parameters:
+  #         - in: path
+  #           name: course_id
+  #           required: true
+  #           schema:
+  #             type: integer
+  #             example: 201
+  #       responses:
+  #         '200':
+  #           description: Successfully Deleted
+  #         '404':
+  #           description: Course not found
+  #         '500':
+  #           description: Intenal Server Error
+
+#   /login:
+#     description: Login into the app
+#     post:
+#       description: Login to the app
+#       requestBody:
+#         content:
+#           application/json:
+#             schema:
+#               type: object
+#               properties:
+#                 user_id:
+#                   type: string
+#                   example: bipin_bhartola
+#                 password:
+#                   type: string
+#                   example: abcd1234
+#       responses:
+#         "201":
+#           description: Successfully Logged in
+#           content:
+#             application/json:
+#               schema:
+#                 type: object
+#                 properties:
+#                   status:
+#                     type: string
+#                     example: success
+
+#         "401":
+#           description: Not authorized / account does not exist
+#         "500":
+#           description: Internal Server Error
+
+#   /signup:
+#     description: signup into the app
+#     post:
+#       description: signup to the app
+#       requestBody:
+#         content:
+#           application/json:
+#             schema:
+#               type: object
+#               properties:
+#                 username:
+#                   type: string
+#                   example: bipin_bhartola
+#                 email_id:
+#                   type: string
+#                   example: abc@abc.com
+#                 password:
+#                   type: string
+#                   example: abcd1234
+#                 first_name:
+#                   type: string
+#                   example: bipin
+#                 last_name:
+#                   type: string
+#                   example: bhartola
+#       responses:
+#         "201":
+#           description: Successfully Logged in
+#           content:
+#             application/json:
+#               schema:
+#                 type: object
+#                 properties:
+#                   status:
+#                     type: string
+#                     example: success
+
+#         "401":
+#           description: Not authorized / account does not exist
+#         "500":
+#           description: Internal Server Error
+
+  /api/user/{user_id}:
+    description: Url to read, update and delete the user resource.
+    get:
+      description: Operation to read user resource
+      parameters:
+        - in: path
+          name: user_id
+          required: true
+          schema:
+            type: integer
+            example: 1
+      responses:
+        '200':
+          description: Request Successful
+          content:
+            application/json:
+              schema:
+                title: user object
+                type: object
+                properties:
+                  user_id:
+                    type: integer
+                    example: 101
+                  firstname:
+                    type: string
+                    example: Narendra
+                  lastname:
+                    type: string
+                    example: Mishra
+                  email_id:
+                    type: string
+                    example: narendra123@gmail.com
+        '500':
+          description: Internal server error
+        '404':
+          description: User not found
+
+    put:
+      description: Operation to update the user resource
+      parameters:
+        - in: path
+          name: user_id
+          required: true
+          schema:
+            type: integer
+            example: 101
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: narendra123@gmail.com
+      responses:
+        '200':
+          description: Successfully updated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user_id:
+                    type: integer
+                    example: 101
+                  email_id:
+                    type: string
+                    example: narendra123@gmail.com
+        '404':
+          description: User not found
+        '500':
+          description: Internal Server Error
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error_code:
+                    type: string
+                  error_message:
+                    type: string
+    delete:
+      description: Operation to delete the user resource
+      parameters:
+        - in: path
+          name: user_id
+          required: true
+          schema:
+            type: integer
+            example: 1
+      responses:
+        '200':
+          description: Successfully Deleted
+        '500':
+          description: Internal Server Error
+        '404':
+          description: User not found
+
+  /api/user:
+    description: Url to create user resource
+    post:
+      description: Operation to create the student resource
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                firstname:
+                  type: string
+                  example: Narendra
+                lastname:
+                  type: string
+                  example: Mishra
+                password:
+                  type: string
+                  example: paSSw@rd123
+                email:
+                  type: string
+                  example: narendra123@gmail.com
+      responses:
+        '201':
+          description: Successfully Created
+          content:
+            application/json:
+              schema:
+                title: student object
+                type: object
+                properties:
+                  user_id:
+                    type: integer
+                    example: 101
+                  first_name:
+                    type: string
+                    example: Narendra
+                  last_name:
+                    type: string
+                    example: Mishra
+                  password:
+                    type: string
+                    example: paSSw@rd123
+                  email:
+                    type: string
+                    example: narendra123@gmail.com
+        '409':
+          description: Student already exist
+        '500':
+          description: Internal Server Error
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error_code:
+                    type: string
+                  error_message:
+                    type: string
+
+#   /api/student/{student_id}/course:
+#     description: Url to get the the list of enrollments a student with student_id is enrolled in.
+#     get:
+#       description: URL to get the list of enrollments, the student is enrolled in. This path belongs to the Enrollment table.
+#       parameters:
+#         - in: path
+#           name: student_id
+#           required: true
+#           schema:
+#             type: integer
+#             example: 101
+#       responses:
+#         '200':
+#           description: Request Successful
+#           content:
+#             application/json:
+#               schema:
+#                 type: array
+#                 items:
+#                   properties:
+#                     enrollment_id:
+#                       type: integer
+#                       example: 10
+#                     student_id:
+#                       type: integer
+#                       example: 101
+#                     course_id:
+#                       type: integer
+#                       example: 201
+#         '400':
+#           description: Invalid Student Id
+#           content:
+#             application/json:
+#               schema:
+#                 type: object
+#                 properties:
+#                   error_code:
+#                     type: string
+#                   error_message:
+#                     type: string
+#         '404':
+#           description: Student is not enrolled in any course
+#         '500':
+#           description: Internal Server Error
+
+#     post:
+#       description: Add student enrollment aka enroll the student to the course. This path belongs to the Enrollment table.
+#       parameters:
+#         - in: path
+#           name: student_id
+#           required: true
+#           schema:
+#             type: integer
+#             example: 101
+#       requestBody:
+#         content:
+#           application/json:
+#             schema:
+#               type: object
+#               properties:
+#                 course_id:
+#                   type: integer
+#                   example: 12345
+#       responses:
+#         '201':
+#           description: Enrollment successful
+#           content:
+#             application/json:
+#               schema:
+#                 type: array
+#                 items:
+#                   properties:
+#                     enrollment_id:
+#                       type: integer
+#                       example: 10
+#                     student_id:
+#                       type: integer
+#                       example: 101
+#                     course_id:
+#                       type: integer
+#                       example: 201
+#         '404':
+#           description: Student not found
+#         '500':
+#           description: Internal Server Error
+#         '400':
+#           description: Bad request
+#           content:
+#             application/json:
+#               schema:
+#                 type: object
+#                 properties:
+#                   error_code:
+#                     type: string
+#                   error_message:
+#                     type: string
+
+#   /api/student/{student_id}/course/{course_id}:
+#     description: URL to delete enrollment of a student in a course. This path belongs to the Enrollment table.
+#     delete:
+#       description: URL to delete enrollment of the student in the course. This path belongs to the Enrollment table.
+#       parameters:
+#         - in: path
+#           name: student_id
+#           required: true
+#           schema:
+#             type: integer
+#             example: 101
+#         - in: path
+#           name: course_id
+#           required: true
+#           schema:
+#             type: integer
+#             example: 10
+#       responses:
+#         '200':
+#           description: Successfully deleted
+#         '400':
+#           description: Invalid Student Id or Course Id.
+#           content:
+#             application/json:
+#               schema:
+#                 type: object
+#                 properties:
+#                   error_code:
+#                     type: string
+#                   error_message:
+#                     type: string
+#         '404':
+#           description: Enrollment for the student not found
+#         '500':
+#           description: Internal Server Error
+

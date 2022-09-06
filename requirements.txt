@@ -1,0 +1,15 @@
+# Flask==2.0.1
+Flask
+Flask-SQLAlchemy==2.5.1
+# werkzeug==2.0.3
+werkzeug
+flask-security-too
+flask_restful
+flask-sse
+flask-cors
+gunicorn
+gevent
+email-validator
+pytest
+requests
+bs4
